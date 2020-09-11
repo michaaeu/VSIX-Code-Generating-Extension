@@ -1,0 +1,41 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension="cs" #>
+<#@ import namespace="System" #>
+<#@ assembly name="VSIXProject" #>
+<#@ parameter type="VSIXProject.KlasaInfo" name="klasaInfo" #>
+<#@ parameter type="VSIXProject.TemplateUtils.TTSettingsDictionary" name="ustawienia" #>
+!!!! Typ = String;	Nazwa = Name;	WartoscDomyslna = asd;		Wartosci = dasd | asdasd | asd;
+!!!! Typ = Bool;	Nazwa = Tryb;	WartoscDomyslna = True; 
+!!!! Typ = Double;	Nazwa = dbl;	WartoscDomyslna = 0.123;	Wartosci = 0.31 | 0.20 | 0.1;
+!!!! Typ = Int;		Nazwa = inte;	WartoscDomyslna = 7;		Wartosci = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+#### Katalog = <#= klasaInfo.Nazwa #>Repo
+#### NazwaPliku = JakisPlik
+//--------------------------------------------------------------
+//  THIS IS AN AUTO GENERATED FILE
+//--------------------------------------------------------------
+using System;
+using System.Diagnostics;
+
+namespace <#= klasaInfo.PrzestrzenNazw #>
+{
+	<#= klasaInfo.ModyfikatorDostepu #> class <#= klasaInfo.Nazwa #>Replica
+	{
+		<#
+		foreach (VSIXProject.WlasciwoscInfo wInfo in klasaInfo.WlasciwosciLista)
+		{
+		#>	
+			<#
+			foreach(string attrInfo in wInfo.AtrybutLista)
+			{
+			#>
+			<#= attrInfo #>
+			<# 
+			} 
+			#><#= wInfo.ModyfikatorDostepu #> <#= wInfo.TypTekst #> <#= wInfo.Nazwa #> <# if (wInfo.MoznaCzytac && wInfo.MoznaZapisac) { #>{ get; set; }
+																					<# } else  { #> { get; }
+																					<# } #> 
+		<# 
+		} 
+		#>
+	}
+}
