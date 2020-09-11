@@ -9,7 +9,7 @@
 !!!! Typ = Double;	Nazwa = dbl;	WartoscDomyslna = 0.123;	Wartosci = 0.31 | 0.20 | 0.1;
 !!!! Typ = Int;		Nazwa = inte;	WartoscDomyslna = 7;		Wartosci = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 #### Katalog = <#= klasaInfo.Nazwa #>Repo
-#### NazwaPliku = JakisPlik
+#### NazwaPliku = NameTest
 //--------------------------------------------------------------
 //  THIS IS AN AUTO GENERATED FILE
 //--------------------------------------------------------------

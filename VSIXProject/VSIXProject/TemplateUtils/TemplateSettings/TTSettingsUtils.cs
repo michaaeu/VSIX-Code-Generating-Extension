@@ -53,7 +53,7 @@ namespace VSIXProject.TemplateUtils.TemplateSettings
                     if (elements.Length < 2)
                         continue;
 
-                    imSettings.Add(new ImmutableSetting(elements[0], elements[1]));
+                    imSettings.Add(new ImmutableSetting(elements[0].Trim(), elements[1].Trim()));
                 }
                 else if (line.StartsWith("<#@ "))
                 {

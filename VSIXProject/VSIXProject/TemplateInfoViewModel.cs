@@ -93,10 +93,19 @@ namespace VSIXProject
             {
                 if (templateInfo.Checked)
                 {
-                    CreateFolderInProject("GeneratedFiles");
+                    string folderName = "GeneratedFiles";
+                    ImmutableSetting folder = templateInfo.ImmutableSettings.Find(x => x.Name.Contains("Katalog"));
+                    if(folder != null)
+                    {
+                        if(folder.Value != null)
+                        {
+                            folderName = folder.Value;
+                        }
+                    }
+                    CreateFolderInProject(folderName);
 
                     string generatedFilePath = templateExecutor.ProcessTemplateToFile(templateInfo);
-                    string destinationFilepath = Directory.GetParent(Directory.GetParent(generatedFilePath).FullName) + "\\GeneratedFiles\\" + Path.GetFileName(generatedFilePath);
+                    string destinationFilepath = Directory.GetParent(Directory.GetParent(generatedFilePath).FullName) + "\\" + folderName + "\\" + Path.GetFileName(generatedFilePath);
 
                     if (File.Exists(destinationFilepath))
                     {

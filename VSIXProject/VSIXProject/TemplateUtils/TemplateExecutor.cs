@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using VSIXProject.TemplateUtils.TemplateSettings;
 
 namespace VSIXProject.TemplateUtils
@@ -56,14 +57,22 @@ namespace VSIXProject.TemplateUtils
             //host.Session["ustawienia"] = settingsDictionary;
 
             string templateContent = TTUtils.GetClearTemplate(templateFilePath);
-
             T4Callback cb = new T4Callback();
             string result = textTemplatingService.ProcessTemplate(templateFilePath, templateContent, cb);
             result = ArrangeUsingRoslyn(result);    //Format code
-            string resultFileName = Path.Combine(Path.GetDirectoryName(templateFilePath),
-                                                klasaInfo.Nazwa + Path.GetFileNameWithoutExtension(templateFilePath))
-                                                + cb.fileExtension;
 
+            string fileName = klasaInfo.Nazwa;
+            ImmutableSetting fileNameSetting = template.ImmutableSettings.Find(x => x.Name.Contains("NazwaPliku"));
+            if (fileNameSetting != null)
+            {
+                if (fileNameSetting.Value != null)
+                {
+                    fileName = fileNameSetting.Value;
+                }
+            }
+            string resultFileName = Path.Combine(Path.GetDirectoryName(templateFilePath),
+                                                fileName + Path.GetFileNameWithoutExtension(templateFilePath))
+                                                + cb.fileExtension;
             // Writing the processed output to file:
             File.WriteAllText(resultFileName, result, cb.outputEncoding);
             // Append any error messages:
