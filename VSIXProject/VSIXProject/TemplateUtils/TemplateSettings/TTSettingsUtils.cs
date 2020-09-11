@@ -20,7 +20,7 @@ namespace VSIXProject.TemplateUtils.TemplateSettings
             while ((line = reader.ReadLine()) != null)
             {
                 if (!line.StartsWith("!!!!") && !line.StartsWith("####")){
-                    templateCode += line;
+                    templateCode += line + Environment.NewLine;
                 }
             }
             return templateCode;

@@ -39,7 +39,6 @@ namespace VSIXProject
             SettingsUtils.UpdateDictionary(templateInfoRecord);
             // Immutable settings: f.e. output dir, output file name 
             templateInfoRecord.ImmutableSettings = SettingsUtils.GetImmutableSettings(templateInfoRecord);
-
         }
     }
 }

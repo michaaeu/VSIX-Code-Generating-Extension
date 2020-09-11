@@ -53,15 +53,13 @@ namespace VSIXProject.TemplateUtils
 
             ITextTemplatingSessionHost host = textTemplatingService as ITextTemplatingSessionHost;
             host.Session["klasaInfo"] = klasaInfo;
-            host.Session["ustawienia"] = settingsDictionary;
+            //host.Session["ustawienia"] = settingsDictionary;
 
             string templateContent = TTUtils.GetClearTemplate(templateFilePath);
 
             T4Callback cb = new T4Callback();
             string result = textTemplatingService.ProcessTemplate(templateFilePath, templateContent, cb);
-            
-            //result = ArrangeUsingRoslyn(result);    //Format code
-
+            result = ArrangeUsingRoslyn(result);    //Format code
             string resultFileName = Path.Combine(Path.GetDirectoryName(templateFilePath),
                                                 klasaInfo.Nazwa + Path.GetFileNameWithoutExtension(templateFilePath))
                                                 + cb.fileExtension;
